@@ -46,12 +46,12 @@ public class Controller {
     public ResponseEntity<String> greet(@RequestParam("name") String name,
                                         @RequestParam("gender") String gender) {
         String salute = "male".equals(gender) ? "Mr" : "Mrs";
-        return new ResponseEntity<>(String.format("Hi %s%s how are ya ", salute, name), HttpStatus.OK);
+        return new ResponseEntity<>(String.format("Hi %s %s how are ya ", salute, name), HttpStatus.OK);
     }
 
     @GetMapping("/greetingwithpathvariables/{age}")
     public ResponseEntity<String> greetUsingPathVariables(@PathVariable int age) {
         boolean ifChild = age < 16 ? true : false;
-        return new ResponseEntity<>("If child or not" + ifChild,HttpStatus.OK);
+        return new ResponseEntity<>("If child or not " + ifChild,HttpStatus.OK);
     }
 }
