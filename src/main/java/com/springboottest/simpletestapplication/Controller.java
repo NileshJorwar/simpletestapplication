@@ -14,12 +14,16 @@ import javax.sql.DataSource;
 @RequestMapping("/api")
 public class Controller {
 
-    @Autowired
+
     TicketService ticketService;
 
     private JdbcTemplate jdbcTemplate;
     private DataSource source;
     
+    public Controller(TicketService ticketService)
+    {
+        this.ticketService=ticketService;
+    }
 
     @PostMapping(value = "/createticket", produces = "application/json")
     public TicketEntity createTicket(@RequestBody TicketEntity ticketEntity) {
