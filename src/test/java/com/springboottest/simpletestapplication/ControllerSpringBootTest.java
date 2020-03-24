@@ -72,7 +72,7 @@ public class ControllerSpringBootTest {
     public void should_return_created_ticketEntity_when_called_createTicket_method() throws Exception {
         TicketEntity expectedTicketEntity =
                 TicketEntity.builder()
-                        .Id("testId")
+                        .id(123)
                         .name("testName")
                         .passenger_age(20)
                         .build();
@@ -110,12 +110,12 @@ public class ControllerSpringBootTest {
 
         TicketEntity expectedTicketEntity =
               TicketEntity.builder()
-                .Id("testId")
+                .id(123)
                 .name("testName")
                 .passenger_age(20)
                 .build();
 
-       when(mockTicketService.getTicketEntityById(anyString()))
+       when(mockTicketService.getTicketEntityById(any()))
                .thenReturn(expectedTicketEntity);
 
        MvcResult actualResult =
@@ -124,8 +124,8 @@ public class ControllerSpringBootTest {
                 )
                 .andReturn();
 
-       verify(mockTicketService).getTicketEntityById("testId");
-        Mockito.verify(mockTicketService, Mockito.times(1)).getTicketEntityById("testId");
+       verify(mockTicketService).getTicketEntityById(123);
+        Mockito.verify(mockTicketService, Mockito.times(1)).getTicketEntityById(123);
         Mockito.verifyNoMoreInteractions(mockTicketService);
 
         TicketEntity actualTicketEntity = new ObjectMapper().readValue(actualResult.getResponse().getContentAsString(),TicketEntity.class);

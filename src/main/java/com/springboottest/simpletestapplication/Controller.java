@@ -14,12 +14,8 @@ import javax.sql.DataSource;
 @RequestMapping("/api")
 public class Controller {
 
-
     TicketService ticketService;
 
-    private JdbcTemplate jdbcTemplate;
-    private DataSource source;
-    
     public Controller(TicketService ticketService)
     {
         this.ticketService=ticketService;
@@ -31,8 +27,13 @@ public class Controller {
     }
 
     @GetMapping(value = "/getticket/{ticketId}")
-    public TicketEntity getTicketById(@PathVariable("ticketId") String tId) {
+    public TicketEntity getTicketById(@PathVariable("ticketId") int tId) {
         return ticketService.getTicketEntityById(tId);
+    }
+
+    @GetMapping(value = "/getticketbyname/{ticketName}")
+    public TicketEntity getTicketByName(@PathVariable("ticketName") String tName) {
+        return ticketService.getTicketEntityByName(tName);
     }
 
     // Testing the application

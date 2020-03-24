@@ -88,7 +88,7 @@ public class ControllerTest {
                 .andExpect(content().string("If child or nottrue"))
                 .andExpect(status().isOk());
 
-        verify(ticketServiceMock, times(0)).getTicketEntityById("");
+        verify(ticketServiceMock, times(0)).getTicketEntityById(15);
 //        verifyNoInteractions(ticketServiceMock);
         verifyZeroInteractions(ticketServiceMock);
     }
@@ -96,18 +96,18 @@ public class ControllerTest {
     @Test
     public void should_return_getTicketById() throws Exception {
         TicketEntity ticketEntity1 = new TicketEntity();
-        ticketEntity1.setId("test");
+        ticketEntity1.setId(123);
         ticketEntity1.setPassenger_age(10);
         ticketEntity1.setName("Ramesh Solanki");
 
-        when(ticketServiceMock.getTicketEntityById("test")).thenReturn(ticketEntity1);
+        when(ticketServiceMock.getTicketEntityById(any())).thenReturn(ticketEntity1);
 
         mockMvc.perform(
-                get("/api/getticket/{ticketId}", "test"))
+                get("/api/getticket/{ticketId}", 123))
                 .andExpect(content().string(containsString(new ObjectMapper().writeValueAsString(ticketEntity1))))
                 .andExpect(status().isOk());
 
-        verify(ticketServiceMock, times(1)).getTicketEntityById("test");
+        verify(ticketServiceMock, times(1)).getTicketEntityById(123);
         verifyNoMoreInteractions(ticketServiceMock);
     }
 
@@ -116,7 +116,7 @@ public class ControllerTest {
 
         TicketEntity ticketEntity1 = new TicketEntity();
         ticketEntity1.setPassenger_age(10);
-        ticketEntity1.setId("testId");
+        ticketEntity1.setId(123);
         ticketEntity1.setName("Ramesh Solanki");
 
         when(ticketServiceMock.createTicket(ticketEntity1)).thenReturn(ticketEntity1);
@@ -150,7 +150,7 @@ public class ControllerTest {
         String baseUrl = "http://localhost:8080/createticket/";
 
         TicketEntity ticketEntity1 = new TicketEntity();
-        ticketEntity1.setId("testId");
+        ticketEntity1.setId(123);
         ticketEntity1.setPassenger_age(10);
         ticketEntity1.setName("Ramesh Solanki");
 

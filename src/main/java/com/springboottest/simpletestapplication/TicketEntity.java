@@ -2,19 +2,17 @@ package com.springboottest.simpletestapplication;
 
 import lombok.Builder;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import java.util.UUID;
+import javax.persistence.*;
 
 @Entity
-@Table
+@Table(name = "TicketTable")
 @Builder
 public class TicketEntity {
+
     @Id
-    @Column
-    private String Id;
+    @Column(length = 200)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
 
     @Column
     private int passenger_age;
@@ -23,22 +21,21 @@ public class TicketEntity {
     private String name;
 
     public TicketEntity() {
-        this.Id = UUID.randomUUID().toString();
+
     }
 
-    public TicketEntity(String Id, int passenger_age, String name) {
-    this.Id=Id;
+    public TicketEntity(int id, int passenger_age, String name) {
+    this.id=id;
     this.passenger_age=passenger_age;
     this.name=name;
     }
 
-
-    public String getId() {
-        return Id;
+    public int getId() {
+        return id;
     }
 
-    public void setId(String id) {
-        Id = id;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public int getPassenger_age() {
