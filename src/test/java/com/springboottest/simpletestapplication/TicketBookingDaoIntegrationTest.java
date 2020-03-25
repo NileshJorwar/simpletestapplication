@@ -17,7 +17,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @SpringBootTest(properties = {"spring.profiles.active=test"}, classes = SimpletestapplicationApplication.class)
 //@TestPropertySource("/application-test.properties")
 //@ActiveProfiles("test")
-public class TicketBookingDaoTest {
+public class TicketBookingDaoIntegrationTest {
 
     @Autowired
     TicketBookingDao ticketBookingDao;
